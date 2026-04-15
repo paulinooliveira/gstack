@@ -1,5 +1,20 @@
 # TODOS
 
+## Infrastructure
+
+### Native Flight auth and session ownership parity
+
+**What:** Harden direct Arrow Flight RPC surfaces so `do_exchange`, `do_get`, `do_put`, and session lifecycle APIs enforce the same auth and session ownership model as the HTTP wrapper.
+
+**Why:** The HTTP wrapper already ties sessions to authenticated callers, but raw native Flight still has weaker ownership enforcement. That is acceptable as a short-term internal transport gap, but not as a long-term platform security posture.
+
+**Context:** Recent runtime-output contract work brought HTTP and native Flight payloads closer together, which makes the remaining auth drift easier to see. The follow-up should define one canonical owner/auth path for both transports, verify it in unit and live tests, and document whether raw Flight is internal-only or supported as a first-class client surface.
+
+**Effort:** M
+**Priority:** P1
+**Depends on:** None
+
+
 ## Sidebar Terminal (cc-pty-import follow-ups)
 
 ### v1.1: PTY session survives sidebar reload
